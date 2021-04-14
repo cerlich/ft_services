@@ -3,11 +3,9 @@
 mariadb-install-db -u root
 mysqld -u root
 
-echo "CREATE DATABASE wordpress;" | mysql -u root --skip-password
-echo "GRANT ALL PRIVILEGES ON wordpress.* TO 'root'@'localhost' WITH GRANT OPTION;" | mysql -u root --skip-password
-echo "update mysql.user set plugin='mysql_native_password' where user='root';" | mysql -u root --skip-password
-echo "FLUSH PRIVILEGES;" | mysql -u root --skip-password
+mysql -u root -e "CREATE DATABASE wordpress;"
+mysql -u root -e "CREATE USER 'admin'@'%' IDENTIFIED BY 'admin';"
+mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' IDENTIFIED BY 'admin' WITH GRANT OPTION; USE wordpress;"
+mysql -u root -e "FLUSH PRIVILEGES"
 
-sleep 5
-
-#exec /usr/bin/mysqld --user=mysql --console
+/usr/bin/supervisord -c /etc/supervisord.conf
