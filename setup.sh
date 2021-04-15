@@ -15,6 +15,6 @@ kubectl apply -f srcs/nginx/nginx.yaml
 
 #mysql
 docker build -t mysql_image srcs/mysql
-kubectl apply -f srcs/mysql/sql.yaml
-sleep 3
+kubectl apply -f srcs/mysql/mysql.yaml
+#sleep 5
 minikube dashboard
