@@ -16,5 +16,13 @@ kubectl apply -f srcs/nginx/nginx.yaml
 #mysql
 docker build -t mysql_image srcs/mysql
 kubectl apply -f srcs/mysql/mysql.yaml
-#sleep 5
+
+#wordpress
+docker build -t wordpress_image srcs/wordpress
+kubectl apply -f srcs/wordpress/wp.yaml
+
+#phpmyadmin
+docker build -t phpmyadmin_image srcs/phpmyadmin
+kubectl apply -f srcs/phpmyadmin/pma.yaml
+#sleep 2
 minikube dashboard
