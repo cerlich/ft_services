@@ -1,6 +1,6 @@
 FROM	alpine:3.12
 
-RUN		apk update && apk upgrade && apk add nginx openssl
+RUN		apk update && apk upgrade && apk add nginx openssl supervisor
 COPY    ./nginx.conf .
 COPY    ./start.sh .
 COPY    ./supervisord.conf /etc/supervisord.conf
