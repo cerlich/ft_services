@@ -21,6 +21,7 @@ RUN     apk update && apk upgrade && apk add mariadb mariadb-client supervisor
 RUN     mkdir -p /run/mysqld
 COPY    ./start.sh .
 COPY	./supervisor.conf /etc/supervisord.conf
+COPY	./wordpress.sql		/
 COPY    ./my.cnf    /etc/my.cnf
 VOLUME ["/var/lib/mysql"]
 
