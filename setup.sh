@@ -9,7 +9,7 @@ eval $(minikube docker-env)
 docker pull metallb/speaker:v0.8.2
 docker pull metallb/controller:v0.8.2
 minikube addons enable metallb
-kubectl apply -f srcs/ips.yaml
+kubectl apply -f srcs/configmap.yaml
 
 #nginx
 docker build -t nginx_image srcs/nginx
@@ -30,5 +30,14 @@ kubectl apply -f srcs/phpmyadmin/pma.yaml
 #ftps
 docker build -t ftps_image srcs/ftps
 kubectl apply -f srcs/ftps/ftps.yaml
+
+##grafana
+#docker build -t grafana_image srcs/grafana
+#kubectl apply -f srcs/grafana/grafana.yaml
+
+##influxdb
+#docker build -t influxdb_image srcs/influxdb
+#kubectl apply -f srcs/influxdb/influxdb.yaml
+
 #sleep 2
 minikube dashboard

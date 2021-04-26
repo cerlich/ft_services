@@ -1,12 +1,11 @@
 FROM    alpine:3.12
 
-RUN     apk add supervisor wget && apk add glibc-2.28-r0.apk && \
-        wget https://dl.grafana.com/enterprise/release/grafana-enterprise-7.5.4.linux-amd64.tar.gz && \
-        tar -zxvf grafana-enterprise-7.5.4.linux-amd64.tar.gz
+RUN     apk add supervisor wget && apk add grafana --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ \
+        telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted --no-cache
 
 COPY    ./start.sh .
 COPY    ./supervisor.conf /etc/supervisord.conf
-
+COPY	./telegraf.conf /etc/telegraf.conf
 
 EXPOSE  3000
 
