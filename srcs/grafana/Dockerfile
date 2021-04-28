@@ -5,7 +5,7 @@ RUN     apk add supervisor wget && apk add grafana --repository http://dl-cdn.al
 
 COPY    ./start.sh .
 COPY    ./supervisor.conf /etc/supervisord.conf
-COPY	./telegraf.conf /etc/telegraf.conf
+COPY	./telegraf.conf /etc/
 
 EXPOSE  3000
 

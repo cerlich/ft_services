@@ -3,21 +3,21 @@ kind: Service
 metadata:
   labels:
     app: influxdb
-  name: influxdb
+  name: influxdb-svc
 spec:
+  ports:
+  - port: 8086
+    protocol: TCP
+    targetPort: 8086
   selector:
     app: influxdb
-  ports:
-  - protocol: TCP
-    port: 8086
-    targetPort: 8086
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: influxdb
   labels:
     app: influxdb
+  name: influxdb
 spec:
   replicas: 1
   selector:
@@ -29,16 +29,17 @@ spec:
         app: influxdb
     spec:
       containers:
-      - name: influxdb
-        image: influxdb_image
+      - image: influxdb_image
         imagePullPolicy: Never
+        name: influxdb
         ports:
-        - containerPort: 8086
+        - name:
+          containerPort: 8086
         volumeMounts:
-        - name: influxdb
-          mountPath: /var/lib/influxdb
+            - mountPath: "/var/lib/influxdb"
+              name: influxdb
       volumes:
-      - name: influxdb
-      hostPath:
+        - name: influxdb
+          hostPath:
             path: /mnt/influxdb
-            type: Directory
+            type: DirectoryOrCreate

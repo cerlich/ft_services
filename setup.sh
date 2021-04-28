@@ -1,8 +1,7 @@
 minikube stop
-sleep 2
 minikube delete
-sleep 2
 minikube start --vm-driver=virtualbox --cpus=4 --memory=4G --disk-size=50G
+minikube ssh 'sudo mkdir /mnt/influxdb; sudo chmod 777 /mnt/influxdb'
 #minikube dashboard
 
 eval $(minikube docker-env)
@@ -31,13 +30,12 @@ kubectl apply -f srcs/phpmyadmin/pma.yaml
 docker build -t ftps_image srcs/ftps
 kubectl apply -f srcs/ftps/ftps.yaml
 
-##grafana
-#docker build -t grafana_image srcs/grafana
-#kubectl apply -f srcs/grafana/grafana.yaml
+#grafana
+docker build -t grafana_image srcs/grafana
+kubectl apply -f srcs/grafana/grafana.yaml
 
-##influxdb
-#docker build -t influxdb_image srcs/influxdb
-#kubectl apply -f srcs/influxdb/influxdb.yaml
+#influxdb
+docker build -t influxdb_image srcs/influxdb
+kubectl apply -f srcs/influxdb/influxdb.yaml
 
-#sleep 2
 minikube dashboard

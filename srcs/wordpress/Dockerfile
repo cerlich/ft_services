@@ -8,9 +8,10 @@ RUN     apk add nginx wget php7-common php7-session php-fpm php-mbstring \
 COPY    ./nginx.conf /etc/nginx/conf.d/default.conf
 COPY    ./start.sh .
 COPY    ./supervisor.conf /etc/supervisord.conf
-COPY	./telegraf.conf /etc/telegraf.conf
+COPY	./telegraf.conf /etc/telegraf/
 COPY    ./wp-config.php /usr/share/webapps/wordpress/
-RUN     mkdir -p /usr/share/webapps/wordpress/wp-content/uploads/2021/04 && cp ./pepe.jpg /usr/share/webapps/wordpress/wp-content/uploads/2021/04/pepe.jpg
+#RUN     mkdir -p /usr/share/webapps/wordpress/wp-content/uploads/2021/04 && 
+COPY     ./pepe.jpg /usr/share/webapps/wordpress/wp-content/uploads/2021/04/
 RUN     cd /usr/share/webapps/ && wget http://wordpress.org/latest.tar.gz && tar -xzvf latest.tar.gz && rm latest.tar.gz
 RUN     ln -s /usr/share/webapps/wordpress/ /var/www/localhost/htdocs/wordpress && mkdir -p /var/run/php
 #RUN     mkdir -p /usr/share/webapps/wordpress/wp-content/uploads/2021/04 && cp ./pepe.jpg /usr/share/webapps/wordpress/wp-content/uploads/2021/04/pepe.jpg

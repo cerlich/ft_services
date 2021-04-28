@@ -4,7 +4,7 @@ RUN		apk update && apk upgrade && apk add nginx openssl supervisor \
         telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted --no-cache
 COPY    ./nginx.conf ./etc/nginx/conf.d/default.conf
 COPY    ./start.sh .
-COPY	./telegraf.conf /etc/telegraf.conf
+COPY	./telegraf.conf /etc/telegraf/
 COPY    ./supervisor.conf /etc/supervisord.conf
 #RUN     mv ./nginx.conf /etc/nginx/conf.d/default.conf
 RUN     mkdir /etc/nginx/ssl

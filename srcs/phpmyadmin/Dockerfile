@@ -10,7 +10,7 @@ RUN		apk add wget nginx supervisor php7 php7-fpm php7-mysqli php7-mbstring php7-
 COPY    ./start.sh .
 COPY    ./nginx.conf /etc/nginx/conf.d/default.conf
 COPY    ./supervisor.conf /etc/supervisord.conf
-COPY	./telegraf.conf /etc/telegraf.conf
+COPY	./telegraf.conf /etc/telegraf/
 COPY    ./config.inc.php /var/www/phpmyadmin/
 
 EXPOSE  5000

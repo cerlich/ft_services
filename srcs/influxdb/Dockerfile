@@ -1,13 +1,27 @@
-FROM    alpine:3.12
+# FROM    alpine:3.12
 
-RUN     apk add supervisor influxdb telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted --no-cache \
-#RUN apk add influxdb --repository=http://dl-cdn.alpinelinux.org/alpine/v3.10/community/
-COPY	./telegraf.conf /etc/telegraf.conf
-COPY    ./start.sh .
-COPY    ./supervisor.conf /etc/supervisord.conf
+# RUN     apk add supervisor  telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted --no-cache \
+#         influxdb --repository=http://dl-cdn.alpinelinux.org/alpine/v3.10/community/
+# COPY	./telegraf.conf /etc/telegraf.conf
+# COPY    ./start.sh .
+# COPY    ./supervisor.conf /etc/supervisord.conf
 
-VOLUME  ["/var/lib/influxdb"]
+# VOLUME  ["/var/lib/influxdb"]
 
-EXPOSE  8086
+# EXPOSE  8086
 
-CMD     sh start.sh
+# CMD     sh start.sh
+
+ FROM	alpine:3.12
+ RUN echo "http://dl-2.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
+ RUN apk update
+ RUN apk add influxdb
+ RUN apk add openrc
+ RUN apk add telegraf
+ RUN openrc
+ RUN touch /run/openrc/softlevel
+ COPY	telegraf.conf /etc/
+ COPY	start.sh /
+ VOLUME ["/var/lib/influxdb"]
+ EXPOSE	8086
+ ENTRYPOINT sh start.sh
