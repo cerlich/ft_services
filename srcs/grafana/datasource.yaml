@@ -1,0 +1,14 @@
+apiVersion: 1
+
+datasources:
+  - name: influxdb
+  # <string, required> datasource type. Required
+    type: influxdb
+    # <string, required> access mode. proxy or direct (Server or Browser in the UI). Required
+    access: proxy
+    database: influxdb
+    user: admin
+    password: admin
+    url: http://influxdb-svc:8086
+    # <bool> mark as default datasource. Max one per org
+    isDefault: true

@@ -30,12 +30,12 @@ kubectl apply -f srcs/phpmyadmin/pma.yaml
 docker build -t ftps_image srcs/ftps
 kubectl apply -f srcs/ftps/ftps.yaml
 
-#grafana
-docker build -t grafana_image srcs/grafana
-kubectl apply -f srcs/grafana/grafana.yaml
-
 #influxdb
 docker build -t influxdb_image srcs/influxdb
 kubectl apply -f srcs/influxdb/influxdb.yaml
+
+#grafana
+docker build -t grafana_image srcs/grafana
+kubectl apply -f srcs/grafana/grafana.yaml
 
 minikube dashboard

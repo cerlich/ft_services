@@ -5,7 +5,10 @@ RUN     apk add supervisor wget && apk add grafana --repository http://dl-cdn.al
 
 COPY    ./start.sh .
 COPY    ./supervisor.conf /etc/supervisord.conf
-COPY	./telegraf.conf /etc/
+COPY	./telegraf.conf /etc/telegraf/
+COPY    ./datasource.yaml /usr/share/grafana/conf/provisioning/datasources/influxdb.yaml
+COPY    ./dashboard.yaml /usr/share/grafana/conf/provisioning/dashboards/dashboards.yaml
+COPY    ./default.json /usr/share/grafana/public/dashboards/
 
 EXPOSE  3000
 
