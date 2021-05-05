@@ -1,4 +1,3 @@
 #!/bin/sh
-#/etc/init.d/telegraf start
-#grafana-server -homepath /usr/share/grafana -config /etc/grafana.ini
+
  /usr/bin/supervisord -c /etc/supervisord.conf
